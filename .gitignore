@@ -1,0 +1,22 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+
+# NuGet packages folder (restored on build / CI)
+[Pp]ackages/
+
+# Visual Studio / Rider / VS Code cruft
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build logs and app package output
+*.binlog
+AppPackages/
+BundleArtifacts/
+
+# Test certs generated locally (keep the checked-in TemporaryKey)
+*.pfx.key

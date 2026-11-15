@@ -1,0 +1,10 @@
+<!--
+    This file contains runtime directives used by .NET Native. It defines which types
+    are available for reflection at runtime. Keep it as-is unless you add features
+    that need extra reflection (serialization, XAML data binding to non-Frame types, etc.).
+-->
+<Directives xmlns="http://schemas.microsoft.com/netfx/2013/01/metadata">
+  <Application>
+    <Assembly Name="LumiaHelloWorld" Dynamic="Required All" />
+  </Application>
+</Directives>

@@ -1,0 +1,46 @@
+name: Build LumiaHelloWorld (ARM appxbundle)
+
+# Builds the UWP app for Windows 10 Mobile (ARM) on a GitHub-hosted Windows runner.
+# Upload the artifact .appxbundle + .cer to the phone via Device Portal (see README Part 4).
+# No Windows PC needed - works straight from a Mac: push this repo to GitHub, enable Actions,
+# download the artifact from the run page.
+
+on:
+  workflow_dispatch:   # manual run from the Actions tab
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    # windows-2022 = VS 2022 with the Universal (UWP) workload, Windows SDK 10.0.17763,
+    # and NuGet CLI preinstalled — verified on the actions/runner-images readme.
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: microsoft/setup-msbuild@v2
+
+      - name: Restore NuGet packages
+        run: nuget restore LumiaHelloWorld.sln
+
+      - name: Build ARM sideload bundle
+        run: >
+          msbuild LumiaHelloWorld/LumiaHelloWorld.csproj
+          /p:Configuration=Release
+          /p:Platform=ARM
+          /p:AppxBundle=Always
+          /p:AppxBundlePlatforms="ARM"
+          /p:UapAppxPackageBuildMode=SideLoadOnly
+          /p:AppxPackageDir="..\AppPackages\"
+          /p:PackageCertificateKeyFile=LumiaHelloWorld_TemporaryKey.pfx
+          /p:PackageCertificatePassword=""
+          /p:AppxPackageSigningEnabled=true
+          /m
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LumiaHelloWorld-ARM-Test
+          path: |
+            AppPackages/**/*.appxbundle
+            AppPackages/**/*.cer

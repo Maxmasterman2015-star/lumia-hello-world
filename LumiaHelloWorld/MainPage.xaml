@@ -1,0 +1,41 @@
+<Page
+    x:Class="LumiaHelloWorld.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:LumiaHelloWorld"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock x:Name="TitleText"
+                   Grid.Row="0"
+                   Text="Lumia Hello World"
+                   Style="{ThemeResource HeaderTextBlockStyle}"
+                   Margin="12,12,12,4" />
+
+        <!-- Hello message -->
+        <TextBlock x:Name="HelloText"
+                   Grid.Row="1"
+                   Text="Hello from your Lumia 950 XL!"
+                   Style="{ThemeResource SubheaderTextBlockStyle}"
+                   TextWrapping="WrapWholeWords"
+                   Margin="12,4,12,4" />
+
+        <!-- Tap button -->
+        <StackPanel Grid.Row="2" Margin="12,4,12,12">
+            <Button x:Name="HelloButton"
+                    Content="Tap me"
+                    Click="HelloButton_Click"
+                    HorizontalAlignment="Stretch" />
+        </StackPanel>
+    </Grid>
+
+</Page>
